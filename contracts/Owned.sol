@@ -5,7 +5,7 @@ contract Owned {
     address public Owner = msg.sender;
 
     //Only accept owner
-    modifier OnlyOwner { if (msg.sender != owner) return; _; }
+    modifier OnlyOwner { if (msg.sender != Owner) return; _; }
 
     //Owner was changed
     event NewOwner(address indexed old, address indexed current);

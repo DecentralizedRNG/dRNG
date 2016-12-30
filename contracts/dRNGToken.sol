@@ -1,5 +1,6 @@
 pragma solidity ^0.4.6;
 import "Owned.sol";
+import "dRNG.sol"; 
 
 contract tokenRecipient { function receiveApproval(address _from, uint256 _value, address _token, bytes _extraData); }
 
@@ -9,6 +10,11 @@ contract dRNGToken is Owned {
     string public symbol = 'dRT';
     uint8 public decimals = 0;
     uint256 public totalSupply = 1000000;
+
+    address dRNGAddress;
+
+    //Only accept call from dRNG
+    modifier OnlydRNG { if (msg.sender != dRNGAddress) return; _; }
 
     /* This creates an array with all balances */
     mapping (address => uint256) public balanceOf;
@@ -20,6 +26,16 @@ contract dRNGToken is Owned {
     /* Initializes contract with initial supply tokens to the creator of the contract */
     function dRNGToken() {
         balanceOf[msg.sender] = totalSupply;                 // Give the creator all initial tokens
+    }
+
+    /* Set dRNG instance from new address */
+    function SetdRNG (address _dRNGAddress) OnlyOwner {
+        dRNGAddress = _dRNGAddress;
+    }
+
+    /* Reward miner who are mining random numbers */
+    function RewardToken(address RewardAddress) OnlydRNG {
+        balanceOf[RewardAddress]++;
     }
 
     /* Send coins */
