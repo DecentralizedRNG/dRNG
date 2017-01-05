@@ -1,6 +1,6 @@
 pragma solidity ^0.4.6;
 
-import "Owned.sol"
+import "Owned.sol";
 import "dRNG.sol";
 import "dRNGToken.sol";
 
@@ -19,7 +19,7 @@ contract dRNGParent is Owned{
 
     function SetIdRNGToken (address dRNGTokenAddress) OnlyOwner {
         if(dRNGTokenAddress != address(0)){
-            IdRNGToken = dRNG(dRNGTokenAddress);
+            IdRNGToken = dRNGToken(dRNGTokenAddress);
         }
     }
 
