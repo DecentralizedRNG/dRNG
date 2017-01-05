@@ -1,7 +1,9 @@
-contract('dRNG', function(accounts) {
+contract('dRNGParent', function(accounts) {
+
   it("should assert true", function(done) {
-    var d_r_n_g = dRNG.deployed();
+    var IdRNGParent = dRNGParent.deployed();
     assert.isTrue(true);
     done();
   });
+
 });
